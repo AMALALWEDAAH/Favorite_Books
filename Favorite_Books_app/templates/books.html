@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome</title>
+        <style>
+            div{
+                display: flex;
+                justify-content: space-between;
+            }
+            .books{
+                display: block;
+            }
+        </style>
+    </head>
+
+
+    <body>
+        <div>
+            <h3>Sucess ! Welcome , {{users.first_name}}!</h3>
+            <a href="logout" style="float: right; ">Log Out</a>
+        </div>
+        <p style="color: green;">Successfully registered or (logged) in !</p>
+        <hr>
+        <div>
+
+            
+            <form action="addBook" method="POST" id="seconedForm">
+                <h2>Add a Favorite Book</h2>
+                {% csrf_token %%}
+                {% if messages %}
+                <ul class="messages"  >
+                    {% for message in messages %}
+                    <li >{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <div>
+                    <label for="title">Title</label>
+                    <input type="text" name="title" required>
+                </div>
+        
+                <div>
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                </div>
+
+                <input type="submit" value="Add">
+
+            </form>
+
+
+            <div class="books">
+                <h2>All Books</h2>
+                {%for Book in books%}
+                    <a href="books/{{Book.id}}">{{Book.title}}</a>
+                    <p>(added by {{Book.uploaded_by.first_name}} {{Book.uploaded_by.last_name}})</p>
+                    {%if users in Book.users_who_like.all %}
+                        <h6>This is one of your favorites</h6>
+                    {%else%}
+                        <a href="{{Book.id}}/favorite">Add to Favorites</a>
+                    {%endif%}
+                    <hr>
+                {%endfor%}
+            </div>
+        </div>
+    </body>
+</html>

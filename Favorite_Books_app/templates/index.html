@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login & Registration</title>
+        <style>
+            #firstForm {
+                width: 30%;
+                float: left;
+                margin-top: 15px;
+            }
+            #seconedForm {
+                width: 60%;
+                float: left;
+                margin-top: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Register</h2>
+        {% if messages %}
+        <ul class="messages"  >
+            {% for message in messages %}
+            <li >{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form action="/registre" method="POST" id="firstForm">
+            {% csrf_token %%}
+
+        <div>
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name">
+        </div>
+
+        <div>
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name">
+        </div>
+
+        <div>
+            <label for="email">Email</label>
+            <input type="email" name="email">
+        </div>
+
+        <div>
+            <label for="password">Password</label>
+            <input type="Password" name="password">
+        </div>
+
+        <div>
+            <label for="confirm_pw"> confirm pw</label>
+            <input type="Password" name="confirm_pw">
+        </div>
+
+        <input type="submit" value="Register">
+
+
+        </form>
+
+        <h2>Login</h2>
+
+
+
+            <form action="/login" method="POST" id="seconedForm">
+                {% csrf_token %%}
+
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" name="email">
+                </div>
+        
+                <div>
+                    <label for="password">Password</label>
+                    <input type="Password" name="password">
+                </div>
+
+                <input type="submit" value="login">
+
+            </form>
+
+    </body>
+</html>
